@@ -12,6 +12,10 @@ class Home extends Component {
           backgroundColor: "#00ffd8"
         }}
       >
+        <input
+          name="search"
+          onChange={event => this.props.handleSearchDragon(event.target.value)}
+        />
         <h1>Home</h1>
         {this.props.dragons.map(dragon => (
           <div>

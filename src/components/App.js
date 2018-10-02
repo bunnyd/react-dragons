@@ -8,7 +8,8 @@ class App extends Component {
     this.state = {
       dragons: [],
       loading: true,
-      warDragons: []
+      warDragons: [],
+      searchTerm: ""
     };
   }
   fetchData = () => {
@@ -47,6 +48,16 @@ class App extends Component {
     }
   };
 
+  handleSearchDragon = input => {
+    this.setState({ searchTerm: input });
+  };
+
+  dragonsToDisplay = () => {
+    return this.state.dragons.filter(dragon =>
+      dragon.name.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+    );
+  };
+
   render() {
     console.log(this.state);
     return (
@@ -56,8 +67,9 @@ class App extends Component {
         ) : (
           <div>
             <Home
-              dragons={this.state.dragons}
+              dragons={this.dragonsToDisplay()}
               handleToggleDragon={this.handleToggleDragon}
+              handleSearchDragon={this.handleSearchDragon}
             />
             <War
               warDragons={this.state.warDragons}
